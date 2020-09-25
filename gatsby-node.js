@@ -26,7 +26,8 @@ exports.createPages = async ({ graphql, actions }) => {
     const projects = data.allContentfulProject.edges
 
     projects.forEach((project, index) => {
-      const previous = index === projects.length - 1 ? null : projects[index + 1].node
+      const previous =
+        index === projects.length - 1 ? null : projects[index + 1].node
       const next = index === 0 ? null : projects[index - 1].node
 
       createPage({

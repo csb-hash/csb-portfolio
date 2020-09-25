@@ -1,7 +1,7 @@
 import storage from "local-storage-fallback"
 import { useState, useEffect } from "react"
 
-const useTheme = (defaultTheme = { mode: "dark" }) => {
+const useTheme = (defaultTheme = { mode: "light" }) => {
   function getInitialTheme() {
     const savedTheme = storage.getItem("colorTheme")
     return savedTheme ? JSON.parse(savedTheme) : defaultTheme

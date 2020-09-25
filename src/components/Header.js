@@ -1,12 +1,47 @@
+// import { Link } from "gatsby"
+import { motion, useCycle } from "framer-motion"
 import React, { useRef } from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
-import { motion, useCycle } from "framer-motion"
-
 import useDimensions from "../hooks/useDimensions"
-import Navigation from "./Navigation"
+import { getSecondaryText, getTextColor } from "../utils/colors"
+import Logo from "./Logo"
 import MenuToggle from "./MenuToggle"
-import ToggleMode from "./ToggleMode"
+import Navigation from "./Navigation"
+import NavMenu from "./NavMenu"
+import ThemeToggle from "./ThemeToggle"
+
+const HeaderBar = styled.header`
+  // position: fixed;
+  width: 100%;
+  // top: 0;
+  height: 15vh;
+  overflow: hidden;
+  padding: 0.5rem 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`
+
+const Toggler = styled(motion.nav)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  opacity: 0;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    opacity: 1;
+  }
+`
 
 const sidebar = {
   open: (height = 1080) => ({
@@ -18,7 +53,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: `circle(30px at 40px 40px)`,
+    clipPath: `circle(0px at 265px 43px)`,
     transition: {
       delay: 0.5,
       type: "spring",
@@ -32,48 +67,12 @@ const Background = styled(motion.div).attrs(() => ({
   initial: "closed",
   sidebar,
 }))`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   bottom: 0;
   width: 300px;
-`
-
-const Toggler = styled(motion.nav)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: auto;
-  z-index: 1;
-`
-
-const Head = styled.header`
-  padding: 1rem 3%;
-  display: flex;
-  justify-content: center;
-
-  h1 {
-    margin: 0;
-    line-height: 1;
-
-    @media screen and (max-width: 375px) {
-      font-size: 1.25rem;
-    }
-
-    @media screen and (max-width: 768px) {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media print {
-    display: none;
-  }
-`
-
-const ThemeToggle = styled(ToggleMode)`
-  position: absolute;
-  right: 0;
+  background: ${getSecondaryText};
 `
 
 const Header = () => {
@@ -82,17 +81,21 @@ const Header = () => {
   const { height } = useDimensions(containerRef)
 
   return (
-    <Head>
-      <Toggler initial={false} animate={isOpen ? "open" : "closed"} custom={height} ref={containerRef}>
-        <Background className="menu-background" variants={sidebar} />
-        <Navigation toggle={() => toggleOpen()} />
-        <MenuToggle toggle={() => toggleOpen()} />
-      </Toggler>
-      <Link to="/">
-        <h1>csbarua</h1>
-      </Link>
+    <HeaderBar>
+      <Logo />
+      <NavMenu />
       <ThemeToggle />
-    </Head>
+      <Toggler
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        custom={height}
+        ref={containerRef}
+      >
+        <Background variants={sidebar} />
+        <MenuToggle toggle={() => toggleOpen()} />
+        <Navigation toggle={() => toggleOpen()} />
+      </Toggler>
+    </HeaderBar>
   )
 }
 

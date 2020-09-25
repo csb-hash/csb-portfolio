@@ -1,25 +1,34 @@
 import React from "react"
+import { FaRegMoon, FaRegSun } from "react-icons/fa"
 import styled, { ThemeConsumer } from "styled-components"
-import { FaSun, FaMoon } from "react-icons/fa"
 
 const Wrapper = styled.div`
-  position: absolute;
-  right: 1rem;
+  position: relative;
+  top: 0;
+  left: 20px;
   cursor: pointer;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 34px;
+    left: 10%;
+    opacity: 0.3;
+  }
 `
 
-const ToggleMode = () => (
+const ThemeToggle = () => (
   <Wrapper>
     <ThemeConsumer>
       {theme =>
         theme.mode === "dark" ? (
-          <FaSun
+          <FaRegSun
             onClick={() => theme.setTheme({ ...theme, mode: "light" })}
             role="button"
             aria-label="Light Mode"
           />
         ) : (
-          <FaMoon
+          <FaRegMoon
             onClick={() => theme.setTheme({ ...theme, mode: "dark" })}
             role="button"
             aria-label="Dark Mode"
@@ -30,4 +39,4 @@ const ToggleMode = () => (
   </Wrapper>
 )
 
-export default ToggleMode
+export default ThemeToggle

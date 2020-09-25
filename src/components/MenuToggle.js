@@ -1,20 +1,21 @@
+import { motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
-import { motion } from "framer-motion"
-import theme from "styled-theming"
+import { getTextColor } from "../utils/colors"
 
 const Path = props => (
-  <motion.path fill="transparent" strokeWidth="3" stroke="hsl(0, 0%, 18%)" strokeLinecap="round" {...props} />
+  <motion.path
+    fill="transparent"
+    strokeWidth="3"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    {...props}
+  />
 )
-
-const getBackground = theme("mode", {
-  dark: "#d6deeb",
-  light: "#011627",
-})
 
 const Svg = styled.svg`
   path {
-    stroke: ${getBackground};
+    stroke: ${getTextColor};
   }
 `
 
@@ -25,18 +26,19 @@ const Button = styled.button`
   -moz-user-select: none;
   -ms-user-select: none;
   cursor: pointer;
-  position: absolute;
-  top: 18px;
-  left: 15px;
+  position: relative;
+  top: 17px;
+  left: 240px;
+  bottom: 0;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: ${getBackground};
+  background: transparent;
 `
 
 const MenuToggle = ({ toggle }) => (
   <Button onClick={toggle}>
-    <Svg width="23" height="23" viewBox="0 0 23 23">
+    <Svg width="16" height="16" viewBox="0 0 20 20">
       <Path
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5" },

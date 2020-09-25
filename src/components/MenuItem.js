@@ -1,13 +1,9 @@
+import { motion } from "framer-motion"
+import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import theme from "styled-theming"
-import { Link } from "gatsby"
-import { motion } from "framer-motion"
+import { getBackground } from "../utils/colors"
 
-const getBackground = theme("mode", {
-  light: "#d6deeb",
-  dark: "#011627",
-})
 const variants = {
   open: {
     y: 0,
@@ -43,18 +39,21 @@ const Item = styled(motion.li).attrs(() => ({
 
 const StyledLink = styled(Link)`
   color: ${getBackground};
+  font-weight: 500;
 `
 
-const MenuItem = ({ item: { title, url }, toggle }) => (
-  <Item
-    variants={variants}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <StyledLink to={url} onClick={toggle}>
-      {title}
-    </StyledLink>
-  </Item>
-)
+const MenuItem = ({ item: { title, url }, toggle }) => {
+  return (
+    <Item
+      variants={variants}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <StyledLink to={url} onClick={toggle}>
+        {title}
+      </StyledLink>
+    </Item>
+  )
+}
 
 export default MenuItem

@@ -27,27 +27,19 @@ const Overlay = styled.div`
   text-shadow: hoff voff blur #000;
   pointer-events: none;
   opacity: 0;
-  background-color: #6b8e23;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  div {
-    margin: 0;
-    padding: 10px;
-    color: #eee;
-  }
+  background-color: #7c37ad44;
+
+  margin: 0;
+  padding: 10px;
+  font-weight: 700;
+  color: #fffff0;
 `
 
-const Project = ({ data: { title, slug, featuredImage, category } }) => (
+const Project = ({ data: { title, slug, featuredImage } }) => (
   <Item>
     <Link to={`/portfolio/${slug}`}>
       <Img fluid={featuredImage.fluid} />
-      <Overlay>
-        <div>{title}</div>
-        <div>
-          <small>{category}</small>
-        </div>
-      </Overlay>
+      <Overlay>{title}</Overlay>
     </Link>
   </Item>
 )

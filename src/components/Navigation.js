@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
+
 import MenuItem from "./MenuItem"
 
 const variants = {
@@ -27,8 +28,8 @@ const itemIds = [
   },
   {
     id: 2,
-    title: "Portfolio",
-    url: "/portfolio",
+    title: "Works",
+    url: "/works",
   },
   {
     id: 3,

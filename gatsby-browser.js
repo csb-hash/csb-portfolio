@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import Layout from "./src/templates/Layout"
 
+import "typeface-montserrat"
+
 const transitionDelay = 500
 
 /* eslint-disable import/prefer-default-export  */

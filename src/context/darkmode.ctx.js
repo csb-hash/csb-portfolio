@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react"
 
 const defaults = {
   darkMode: false,
-  changeMod: () => {},
+  changeMode: () => {},
 }
 
 const DarkModeContext = createContext(defaults)
@@ -14,6 +14,7 @@ const Provider = ({ children }) => {
     try {
       toggleDarkMode(!currentMode)
     } catch (err) {
+      /* eslint-disable no-console */
       console.error(err)
     }
   }

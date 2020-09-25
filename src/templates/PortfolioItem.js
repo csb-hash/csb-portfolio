@@ -2,13 +2,44 @@ import React from "react"
 import styled from "styled-components"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 import SEO from "../components/seo"
 import Container from "../components/Container"
 // import Button from "../components/Button"
 
-const Image = styled(Img)`
+const Title = styled.h1`
+  font-size: 3rem;
+  font-weight: 200;
+`
+
+const Summary = styled.p`
+  font-size: 1.3rem;
+  font-weight: 300;
+`
+
+const Description = styled.p`
+  font-weight: 300;
   margin-top: 2rem;
+`
+
+const About = styled.div`
+  margin-top: 2rem;
+
+  p {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+
+    strong {
+      font-weight: 400;
+    }
+  }
+`
+
+const Image = styled(Img)`
+  margin: 0;
+  padding: 0;
+  max-height: 580px;
 `
 
 const Pagination = styled.ul`
@@ -35,7 +66,7 @@ const PortfolioItem = ({ data, pageContext }) => {
   const {
     title,
     client,
-    description: { description },
+    description: { json: description },
     featuredImage,
     category,
     platform,
@@ -46,16 +77,41 @@ const PortfolioItem = ({ data, pageContext }) => {
   return (
     <>
       <SEO title={title} description={description} />
-      <Image fluid={featuredImage.fluid} alt={title} style={{ maxHeight: "400px" }} />
-      <Container>
-        <h2>{title}</h2>
-        <h3>
-          {category} - {platform}
-        </h3>
-        <p>
-          <em>for</em> {client}
-        </p>
-        <small>{when}</small>
+      <Image fluid={featuredImage.fluid} alt={title} />
+      <Container style={{ marginTop: "4rem" }}>
+        <Title>{title}</Title>
+        <Summary>
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua.{" "}
+        </Summary>
+        <Description>{documentToReactComponents(description)}</Description>
+        <About>
+          <p>
+            <div>
+              <strong>Client</strong>
+            </div>
+            <div>{client}</div>
+          </p>
+          <p>
+            <div>
+              <strong>Date</strong>
+            </div>
+            <div>{when}</div>
+          </p>
+          <p>
+            <div>
+              <strong>Category</strong>
+            </div>
+            <div>{category}</div>
+          </p>
+          <p>
+            <div>
+              <strong>Platform</strong>
+            </div>
+            <div>{platform}</div>
+          </p>
+        </About>
         <Pagination>
           {previous && (
             <li>
@@ -93,14 +149,14 @@ export const pageQuery = graphql`
       category
       platform
       description {
-        description
+        json
       }
       featuredImage {
         fluid(maxWidth: 1920, quality: 70) {
           ...GatsbyContentfulFluid
         }
       }
-      when
+      when(formatString: "MMMM Do YYYY")
     }
   }
 `

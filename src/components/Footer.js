@@ -1,66 +1,90 @@
 import React from "react"
 import styled from "styled-components"
-import { FaLinkedin, FaFacebook, FaInstagram, FaBehance, FaYoutube, FaDribbble, FaPinterest } from "react-icons/fa"
-import Menu from "./Menu"
+import {
+  FaLinkedin,
+  FaFacebook,
+  FaInstagram,
+  FaBehance,
+  FaDribbble,
+} from "react-icons/fa"
+import FooterMenu from "./FooterMenu"
 
 const Foot = styled.footer`
-  padding: 0 3% 1rem;
+  padding: 0 10%;
+  height: 5vh;
+  overflow: hidden;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  z-index: 1;
 
-  @media print {
-    display: none;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
   }
+`
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
+const Copy = styled.div`
+  font-weight: 300;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
   }
 `
 
 const Footer = () => (
   <Foot>
-    <div>&copy; {new Date().getFullYear()} Chowdhury Santanu Barua</div>
-    <nav>
-      <Menu>
+    <Copy>&copy; {new Date().getFullYear()} | Chowdhury Santanu Barua</Copy>
+    <FooterMenu>
+      <ul>
         <li>
-          <a href="https://bd.linkedin.com/in/csbarua" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://bd.linkedin.com/in/csbarua"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaLinkedin />
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/cs.barua/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.instagram.com/cs.barua/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram />
           </a>
         </li>
         <li>
-          <a href="https://www.facebook.com/getcsb" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.facebook.com/getcsb"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaFacebook />
           </a>
         </li>
         <li>
-          <a href="https://www.behance.net/csbarua" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.behance.net/csbarua"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaBehance />
           </a>
         </li>
         <li>
-          <a href="https://www.dribble.com/csbarua" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.dribble.com/csbarua"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaDribbble />
           </a>
         </li>
-        <li>
-          <a href="https:www.pinterest.com/csbarua" target="_blank" rel="noopener noreferrer">
-            <FaPinterest />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.youtube.com/csbarua" target="_blank" rel="noopener noreferrer">
-            <FaYoutube />
-          </a>
-        </li>
-      </Menu>
-    </nav>
+      </ul>
+    </FooterMenu>
   </Foot>
 )
 
