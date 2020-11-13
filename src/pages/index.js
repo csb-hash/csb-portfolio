@@ -7,13 +7,14 @@ import SEO from "../components/seo"
 import Button from "../components/Button"
 
 const Intro = styled.section`
-  min-height: 80vh;
+  min-height: 75vh;
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
+  justify-content: flex-end;
 
   @media (max-width: 768px) {
-    min-height: 75vh;
+    margin: 0;
+    min-height: 70vh;
   }
 `
 
@@ -34,15 +35,15 @@ const Text = styled.p`
   // line-height: 2;
   font-size: 1rem;
   max-width: 600px;
-  margin: 2rem 0 5rem 0;
+  margin: 2rem 0;
 `
 
 const IndexPage = () => {
   return (
     <>
       <SEO title="Home" />
-      <Intro>
-        <Container>
+      <Container>
+        <Intro>
           <Headline>
             Hi there! <br />
             I&apos;m <span>Santanu</span>, a Graphic Designer.
@@ -61,8 +62,8 @@ const IndexPage = () => {
             <br />
             <Button href="/works">View My Works</Button>
           </Text>
-        </Container>
-      </Intro>
+        </Intro>
+      </Container>
     </>
   )
 }

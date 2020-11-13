@@ -78,7 +78,7 @@ const PortfolioItem = ({ data, pageContext }) => {
     <>
       <SEO title={title} description={description} />
       <Image fluid={featuredImage.fluid} alt={title} />
-      <Container style={{ marginTop: "4rem" }}>
+      <Container narrow>
         <Title>{title}</Title>
         <Summary>
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

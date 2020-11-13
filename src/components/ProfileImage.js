@@ -8,12 +8,13 @@ const Image = styled(Img)`
   margin-left: auto;
   margin-right: 10px;
   padding: 0;
-  max-height: 320px;
+  max-width: 380px;
   border-radius: 8px;
 
-  // @media (max-width: 768px) {
-  //   margin: 0 auto;
-  // }
+  @media (max-width: 768px) {
+    max-width: 380px;
+    margin: 0 auto;
+  }
 `
 
 const ProfileImage = () => {

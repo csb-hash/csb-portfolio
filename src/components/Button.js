@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import { getSecondaryText, getTextColor } from "../utils/colors"
 
@@ -16,6 +16,13 @@ const StyledButton = styled.a`
   transition: 0.2s;
   display: inline-block;
   text-decoration: none;
+
+  ${props =>
+    props.bottom &&
+    css`
+      margin: 1rem 0 0 0;
+    `}
+
   &:hover {
     cursor: pointer;
     background: ${getSecondaryText};

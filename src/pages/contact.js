@@ -7,6 +7,18 @@ import Container from "../components/Container"
 import PgHeading from "../components/PgHeading"
 import { getTextColor } from "../utils/colors"
 
+const Section = styled.div`
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    margin: 0;
+    min-height: 60vh;
+  }
+`
+
 const Email = styled.section`
   h1 {
     font-weight: 700;
@@ -53,36 +65,38 @@ const contact = () => {
       <SEO title="Contact" />
       <Container>
         <PgHeading>__Contact</PgHeading>
-        <Email>
-          <h1>santanu@csbarua.com</h1>
-          <p>
-            Got a question or comment about my work?
-            <br />
-            Reach out and Let&apos;s talk. I look forward to hearing from you.{" "}
-          </p>
-          <p>Let&apos;s make something great!</p>
-        </Email>
-        <Social>
-          <h1>Find me on</h1>
-          <p>
-            <span>
-              <FaWhatsapp />
-            </span>
-            +(880) 1914 207809
-          </p>
-          <p>
-            <span>
-              <FaTelegramPlane />
-            </span>
-            @csbarua
-          </p>
-          <p>
-            <span>
-              <FaSkype />
-            </span>
-            csbarua
-          </p>
-        </Social>
+        <Section>
+          <Email>
+            <h1>santanu@csbarua.com</h1>
+            <p>
+              Got a question or comment about my work?
+              <br />
+              Reach out and Let&apos;s talk. I look forward to hearing from you.{" "}
+            </p>
+            <p>Let&apos;s make something great!</p>
+          </Email>
+          <Social>
+            <h1>Find me on</h1>
+            <p>
+              <span>
+                <FaWhatsapp />
+              </span>
+              +(880) 1914 207809
+            </p>
+            <p>
+              <span>
+                <FaTelegramPlane />
+              </span>
+              @csbarua
+            </p>
+            <p>
+              <span>
+                <FaSkype />
+              </span>
+              csbarua
+            </p>
+          </Social>
+        </Section>
       </Container>
     </div>
   )

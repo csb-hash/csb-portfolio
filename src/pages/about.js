@@ -8,51 +8,20 @@ import Button from "../components/Button"
 import ProfileImage from "../components/ProfileImage"
 
 const Section = styled.section`
+  min-height: 60vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 3fr;
+  grid-gap: 2rem;
+  align-items: end;
 
   @media (max-width: 768px) {
-    grid-template-columns: 2fr 1fr;
-    div {
-      // grid-row: 2;
-      margin-bottom: 4rem;
+    grid-template-columns: auto;
+    .about {
+      grid-row: 2;
+      margin: 0 0 4rem 0;
     }
-    // line-height: 1;
   }
 `
-
-// const WithSidebar = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-
-//   main {
-//     width: 70%;
-//     min-width: 280px;
-//     flex-grow: 1;
-//   }
-
-//   aside {
-//     width: 30%;
-//     min-width: 280px;
-
-//     ul {
-//       list-style: none;
-//       margin: 0;
-//       padding: 0;
-
-//       li {
-//         margin-bottom: 0.5rem;
-//       }
-//     }
-
-//     h2:first-of-type {
-//       margin: 0 0.5rem 1rem 0;
-//       display: inline-block;
-//       font-size: 1rem;
-//     }
-//   }
-// `
 
 const About = () => (
   <div>
@@ -60,7 +29,7 @@ const About = () => (
     <Container>
       <PgHeading>__About</PgHeading>
       <Section>
-        <div>
+        <div className="about">
           <p>
             Graphic designer, born and raised in Chittagong and now based id
             Dhaka Bangladesh. I simply love design and open to fresh ideas.
@@ -76,9 +45,11 @@ const About = () => (
             A son, a brother and a loving husband. I like sugar free toast, and
             I cannot resist myself when I see &ldquo;shingara!!&rdquo;
           </p>
-          <Button>Download CV</Button>
+          <Button bottom>Download CV</Button>
         </div>
-        <ProfileImage />
+        <div>
+          <ProfileImage />
+        </div>
       </Section>
     </Container>
   </div>

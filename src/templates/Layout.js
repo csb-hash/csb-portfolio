@@ -1,33 +1,33 @@
 import React from "react"
 import styled, { ThemeProvider } from "styled-components"
-// import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 import GlobalStyles from "../components/GlobalStyles"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import useTheme from "../hooks/useTheme"
 
-// const duration = 0.5
+const duration = 0.5
 
-// const variants = {
-//   initial: {
-//     opacity: 0,
-//   },
-//   enter: {
-//     opacity: 1,
-//     transition: {
-//       duration,
-//       delay: duration,
-//       when: "beforeChildren",
-//     },
-//   },
-//   exit: {
-//     opacity: 0,
-//     transition: {
-//       duration,
-//     },
-//   },
-// }
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+    transition: {
+      duration,
+      delay: duration,
+      when: "beforeChildren",
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration,
+    },
+  },
+}
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,26 +43,30 @@ const Wrapper = styled.div`
   // }
 `
 
-// const Main = styled(motion.main).attrs(() => ({
-//   initial: "initial",
-//   variants,
-// }))`
-//   width: 100%;
-//   padding: 0;
-//   margin: 0;
-//   flex-grow: 1;
-// `
-
-const Main = styled.main`
+const Main = styled(motion.main).attrs(() => ({
+  initial: "initial",
+  variants,
+}))`
   width: 100%;
   padding: 0;
   margin: 0;
   flex-grow: 1;
 
   @media (min-width: 768px) {
-    z-index: 1;
+    // z-index: 1;
   }
 `
+
+// const Main = styled.main`
+//   width: 100%;
+//   padding: 0;
+//   margin: 0;
+//   flex-grow: 1;
+
+//   @media (min-width: 768px) {
+//     z-index: 1;
+//   }
+// `
 
 const Layout = ({ children }) => {
   const colorTheme = useTheme()
@@ -73,7 +77,17 @@ const Layout = ({ children }) => {
         <GlobalStyles />
         <Wrapper>
           <Header />
-          <Main>{children}</Main>
+          <AnimatePresence>
+            <Main
+              key={location?.pathname}
+              variants={variants}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+            >
+              {children}
+            </Main>
+          </AnimatePresence>
           <Footer />
         </Wrapper>
       </>

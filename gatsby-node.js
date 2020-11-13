@@ -3,11 +3,21 @@ const path = require("path")
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const portfolioItem = path.resolve(`./src/templates/PortfolioItem.js`)
-
   const { errors, data } = await graphql(`
-    query allContentfulProject {
-      allContentfulProject(sort: { fields: id, order: ASC }, limit: 1000) {
+    {
+      projects: allContentfulProject(
+        sort: { fields: id, order: ASC }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            title
+            slug
+          }
+        }
+      }
+
+      blogs: allContentfulPost(sort: { fields: id, order: ASC }, limit: 1000) {
         edges {
           node {
             title
@@ -23,7 +33,11 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   if (data) {
-    const projects = data.allContentfulProject.edges
+    const projects = data.projects.edges
+    const blogs = data.blogs.edges
+
+    const portfolioItem = path.resolve(`./src/templates/PortfolioItem.js`)
+    const postItem = path.resolve(`./src/templates/PostItem.js`)
 
     projects.forEach((project, index) => {
       const previous =
@@ -37,6 +51,16 @@ exports.createPages = async ({ graphql, actions }) => {
           slug: project.node.slug,
           previous,
           next,
+        },
+      })
+    })
+
+    blogs.forEach(blog => {
+      createPage({
+        path: `blog/${blog.node.slug}`,
+        component: postItem,
+        context: {
+          slug: blog.node.slug,
         },
       })
     })
