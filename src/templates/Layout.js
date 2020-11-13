@@ -71,6 +71,11 @@ const Main = styled(motion.main).attrs(() => ({
 const Layout = ({ children }) => {
   const colorTheme = useTheme()
 
+  let = path = ""
+  if (typeof window !== "undefined") {
+    path = window.location.pathname
+  }
+
   return (
     <ThemeProvider theme={colorTheme}>
       <>
@@ -79,7 +84,7 @@ const Layout = ({ children }) => {
           <Header />
           <AnimatePresence>
             <Main
-              key={location?.pathname}
+              key={path}
               variants={variants}
               initial="initial"
               animate="enter"
