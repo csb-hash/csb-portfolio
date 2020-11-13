@@ -71,7 +71,7 @@ const Main = styled(motion.main).attrs(() => ({
 const Layout = ({ children }) => {
   const colorTheme = useTheme()
 
-  let = path = ""
+  let path = ""
   if (typeof window !== "undefined") {
     path = window.location.pathname
   }
