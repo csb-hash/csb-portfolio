@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import { getBackground } from "../utils/colors"
+import { getBackground, getTextColor } from "../utils/colors"
 
 const variants = {
   open: {
@@ -38,7 +38,7 @@ const Item = styled(motion.li).attrs(() => ({
 `
 
 const StyledLink = styled(Link)`
-  color: ${getBackground};
+  color: ${getTextColor};
   font-weight: 500;
 `
 

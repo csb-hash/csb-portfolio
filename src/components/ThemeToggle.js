@@ -3,18 +3,16 @@ import { FaRegMoon, FaSun } from "react-icons/fa"
 import styled, { ThemeConsumer } from "styled-components"
 
 const Wrapper = styled.div`
-  position: relative;
-  top: 0;
-  left: 20px;
+  position: absolute;
+  right: 2rem;
   cursor: pointer;
- // z-index: 100;
 
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 34px;
-    left: 10%;
-    opacity: 0.3;
-  }
+  // @media (max-width: 768px) {
+  //   position: absolute;
+  //   top: 34px;
+  //   left: 10%;
+  //   opacity: 0.3;
+  // }
 `
 
 const ThemeToggle = () => (

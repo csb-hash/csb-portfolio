@@ -37,7 +37,9 @@ const Works = ({ data }) => {
     projects.forEach(project => {
       const { node } = project
 
-      categories.push(node.category)
+      if (!categories.includes(node.category)) {
+        categories.push(node.category)
+      }
     })
   }
 

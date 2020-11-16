@@ -15,7 +15,6 @@ const Foot = styled.footer`
   overflow: hidden;
   display: flex;
   justify-content: space-between;
- // z-index: 1;
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;

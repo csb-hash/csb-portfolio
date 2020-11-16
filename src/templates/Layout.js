@@ -51,22 +51,7 @@ const Main = styled(motion.main).attrs(() => ({
   padding: 0;
   margin: 0;
   flex-grow: 1;
-
-  @media (min-width: 768px) {
-    // z-index: 1;
-  }
 `
-
-// const Main = styled.main`
-//   width: 100%;
-//   padding: 0;
-//   margin: 0;
-//   flex-grow: 1;
-
-//   @media (min-width: 768px) {
-//     z-index: 1;
-//   }
-// `
 
 const Layout = ({ children }) => {
   const colorTheme = useTheme()
