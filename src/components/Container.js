@@ -5,13 +5,6 @@ const Container = styled.div`
   max-width: 100%;
   margin: 0 auto;
   padding: 0 10%;
-
-  ${props =>
-    props.narrow &&
-    css`
-      margin: 4rem auto;
-      padding: 0 15%;
-    `}
 `
 
 export default Container

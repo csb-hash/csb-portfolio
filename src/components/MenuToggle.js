@@ -27,8 +27,8 @@ const Button = styled.button`
   -ms-user-select: none;
   cursor: pointer;
   position: absolute;
-  top: 32px;
-  left: 32px;
+  top: 30px;
+  left: 24px;
   bottom: 0;
   width: 50px;
   height: 50px;

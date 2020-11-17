@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: `Chowdhury Santanu Barua`,
     description: `Graphic designer and illustration artist with more than 10 years of experience in the design industry`,
-    author: `Chowdhury Santanu Barua <santanu@csbarua.com>`,
+    author: `Chowdhury Santanu Barua`,
     siteUrl: `https://csbarua.com`,
   },
   plugins: [

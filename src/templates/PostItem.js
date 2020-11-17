@@ -1,43 +1,71 @@
-import React from "react"
-import styled from "styled-components"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS, MARKS } from "@contentful/rich-text-types"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import SEO from "../components/seo"
+import React from "react"
+import styled from "styled-components"
 import Container from "../components/Container"
-import { getTextColor, getBackground } from "../utils/colors"
+import SEO from "../components/seo"
 
-const Hero = styled.div`
-  position: relative;
-  overflow: hidden;
+// const Hero = styled.div`
+//   position: relative;
+//   overflow: hidden;
+// `
+
+const Content = styled(Container)`
+  margin: 4rem auto;
+
+  @media (min-width: 768px) {
+    margin: 4rem auto;
+    padding: 0 15%;
+  }
 `
 
 const Image = styled(Img)`
   margin: 0;
   padding: 0;
-  max-height: 320px;
-  opacity: 0.5;
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
+  max-height: 360px;
+  // opacity: 0.5;
+  // filter: blur(2px);
+  // -webkit-filter: blur(2px);
 `
 
 const Title = styled.h1`
-  position: absolute;
-  bottom: 0;
-  margin: 0 10%;
-  padding: 0.5rem;
   font-size: 4rem;
-  font-weight: 200;
-  background: ${getBackground};
-  color: ${getTextColor};
+  // font-weight: 200;
+
+  @media (max-width: 768px) {
+    font-size: 2.3rem;
+  }
+
+  @media (max-width: 490px) {
+    font-weight: 1.5rem;
+  }
 `
 
 const Meta = styled.p`
   font-wight: 200;
   margin-top: 0;
   padding: 0;
-  // display: flex;
-  // justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+`
+
+const Author = styled.div``
+
+const Avatar = styled(Img)`
+  margin: 0 1rem 0 0;
+  padding: 0;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+`
+
+const Date = styled.div`
+  em {
+    margin: 0 0.5rem;
+  }
 `
 
 const Tag = styled.p`
@@ -54,14 +82,53 @@ const Tags = styled.span`
 `
 
 const Summary = styled.p`
-  // font-size: 1.3rem;
+  border-left: 3px solid;
+  border-right: 3px solid;
+  border-radius: 12px;
+  margin: 2.5rem 0;
+  padding: 2rem;
   font-style: italic;
   font-weight: 300;
 `
 
+const Text = ({ children }) => <p>{children}</p>
+
+const options = {
+  renderMark: {
+    [MARKS.BOLD]: text => <strong>{text}</strong>,
+    [MARKS.ITALIC]: text => <em>{text}</em>,
+    [MARKS.UNDERLINE]: text => <span className="underline">{text}</span>,
+  },
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+  },
+  renderText: text => {
+    return text.split("\n").reduce((children, textSegment, index) => {
+      return [...children, index > 0 && <br key={index} />, textSegment]
+    }, [])
+  },
+}
+
 const Body = styled.p`
-  font-weight: 300;
+  font-size: 1.1rem;
+  font-weight: 400;
   margin-top: 2rem;
+
+  p {
+    line-height: 1.8;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
 `
 
 const PostItem = ({ data }) => {
@@ -76,20 +143,32 @@ const PostItem = ({ data }) => {
     updatedAt,
   } = data.contentfulPost
 
+  const { author } = data.site.siteMetadata
+  const { avatar } = data
+
   return (
     <>
       <SEO title={title} />
-      <Hero>
-        <Image fluid={featuredImage.fluid} alt={title} />
+      <Container>
         <Title>{title}</Title>
-      </Hero>
-      <Container style={{ margin: "3rem 0", padding: "0 20%" }}>
         <Meta>
-          <strong>Posted: </strong>
-          <em>{createdAt}</em>
-          <strong> Updated: </strong>
-          <em>{updatedAt}</em>
+          <Avatar
+            fluid={avatar.childImageSharp.fluid}
+            alt="Avatar of Santanu"
+          />
+          <div>
+            <Author>{author}</Author>
+            <Date>
+              Posted: <em>{createdAt}</em> {" / "}
+              Updated: <em>{updatedAt}</em>
+            </Date>
+          </div>
         </Meta>
+        <Image fluid={featuredImage.fluid} alt={title} />
+      </Container>
+      <Content>
+        <Summary>{summary}</Summary>
+        <Body>{documentToReactComponents(body, options)}</Body>
         <Tag>
           {tags && tags.length > 0 ? (
             <span>
@@ -101,9 +180,7 @@ const PostItem = ({ data }) => {
             </span>
           ) : null}
         </Tag>
-        <Summary style={{ marginTop: "3rem" }}>{summary}</Summary>
-        <Body>{documentToReactComponents(body)}</Body>
-      </Container>
+      </Content>
     </>
   )
 }
@@ -115,6 +192,14 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+      }
+    }
+
+    avatar: file(relativePath: { eq: "santanu02.jpg" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
       }
     }
 

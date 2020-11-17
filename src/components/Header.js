@@ -48,7 +48,7 @@ const HeaderBar = styled.header`
   }
 `
 const Toggler = styled(motion.nav)`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
@@ -74,7 +74,7 @@ const Background = styled(motion.div).attrs(() => ({
 `
 
 const ToggleMode = styled(ThemeToggle)`
-  position: abslute;
+  position: absolute;
   right: 0;
 `
 

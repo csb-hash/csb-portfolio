@@ -95,7 +95,7 @@ const Works = ({ data }) => {
 
 export const pageQuery = graphql`
   query allContentfulProject {
-    allContentfulProject {
+    allContentfulProject(sort: { fields: createdAt, order: DESC }) {
       edges {
         node {
           title

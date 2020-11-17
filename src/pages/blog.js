@@ -8,13 +8,13 @@ import Post from "../components/Post"
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2rem;
   // grid-auto-rows: auto;
   margin-bottom: 8rem;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   @media (max-width: 490px) {
@@ -42,7 +42,7 @@ const Blog = ({ data }) => {
 
 export const pageQuery = graphql`
   {
-    allContentfulPost {
+    allContentfulPost(sort: { fields: createdAt, order: DESC }) {
       edges {
         node {
           title
